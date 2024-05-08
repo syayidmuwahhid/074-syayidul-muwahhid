@@ -1,3 +1,24 @@
+## Project Akhir JDA Fase 2
+Nama : Syayidul Muwahhid (074)
+
+Judul : API Resource Manager
+
+Deskripsi : 
+	Website yang diperuntukan untuk menyimpan resource file berupa foto/dokumen/video yang nantinya setiap file akan diberikan url yang dapat digunakan sebagai resource dari sebuah aplikasi. sehingga dapat menghemat cost storage dari aplikasi karena hanya perlu memanggil url API dari filenya.
+
+Contoh Alur utama:
+1. user mengupload gambar.
+2. Sistem menyimpan dan megenerate link lokasi gambar.
+3. user dapat menggunakan link tersebut sebagai resource untuk aplikasi lain, seperti:
+
+img src="link hasil generate"
+
+atau
+
+Picasso.with(this).load("link hasil generate").into(imageView);
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
