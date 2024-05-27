@@ -36,6 +36,8 @@
             <!--end::Engage Widget 1-->
         </div>
         <!--end::Col-->
+    </div>
+    <div class="row g-5 gx-xxl-8 mb-xxl-3 mt-4">
         <!--begin::Col-->
         <div class="col-12">
             <!--begin::Table Widget 1-->
@@ -75,11 +77,7 @@
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>
-                                        {{-- @if(Auth::user()->role_id == 1)
-                                        <a href="{{ route('admin.transactions.show', Crypt::encryptString($data->id)) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["title"] }}</a>
-                                        @else --}}
                                         <a href="{{ route('transactions.show', Crypt::encryptString($data->id)) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["title"] }}</a>
-                                        {{-- @endif --}}
                                     </td>
                                     <td>{{ date('d F Y', strtotime($data->created_at)) }}</td>
                                     <td>{{ count($data->file) }} Files</td>
@@ -99,7 +97,8 @@
                                         @else
                                         @php($badge = 'badge-danger')
                                         @endif
-                                        <span class="badge {{ $badge }}">{{ $data->status->status }}</span></td>
+                                        <span class="badge {{ $badge }}">{{ $data->status->status }}</span>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 <!--end::Table row-->

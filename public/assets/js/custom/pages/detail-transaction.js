@@ -1,11 +1,12 @@
 $(document).ready(function () {
     $(".copy_txt_btn").click(function () {
         let copyText = $(this).data("link");
-        var successful = navigator.clipboard.writeText(copyText);
-        var msg = successful
-            ? "Link Copied Succesfully, paste into your apps!"
-            : "Copying failed, consider upgrading your browser.";
-        alert(msg);
+        navigator.clipboard.writeText(copyText)
+            ? swal("success", "Link Copied Succesfully, paste into your apps!")
+            : swal(
+                  "danger",
+                  "Copying failed, consider upgrading your browser."
+              );
     });
 
     $("#btn_add_file").click(() => {

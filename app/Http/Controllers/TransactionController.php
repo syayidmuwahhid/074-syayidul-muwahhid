@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\File;
 use App\Models\Status;
 use App\Models\Transaction;
@@ -89,6 +90,7 @@ class TransactionController extends Controller
             $resource->save();
             DB::commit();
             session()->flash('success', 'successfully added the resource, continue with adding files');
+            ActivityLog::addLog('success', 'Adding new resource "' . $resource->title . '"');
 
             $resp = array(
                 "title" => "Add Files to Resource",
@@ -107,6 +109,7 @@ class TransactionController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', $th->getMessage());
+            ActivityLog::addLog('fail', 'Adding new resource ['. $th->getMessage() .']');
             return redirect()->back()->withInput();
         }
     }
@@ -173,12 +176,14 @@ class TransactionController extends Controller
             $resource->save();
             DB::commit();
             session()->flash('success', 'successfully updated the resource');
+            ActivityLog::addLog('success', 'Updating resource "' . $resource->title . '"');
 
             return redirect()->back();
 
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', $th->getMessage());
+            ActivityLog::addLog('fail', 'Updating resource ['. $th->getMessage() .']');
             return redirect()->back()->withInput();
         }
     }
@@ -205,10 +210,12 @@ class TransactionController extends Controller
 
             DB::commit();
             session()->flash('success', 'File deleted successfully');
+            ActivityLog::addLog('success', 'Removing resource "' . $transacion->title . '"');
             return redirect()->back();
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', $th->getMessage());
+            ActivityLog::addLog('fail', 'Removing resource ['. $th->getMessage() .']');
             return back();
         }
     }
@@ -222,10 +229,12 @@ class TransactionController extends Controller
             $resource->save();
             DB::commit();
             session()->flash('success', 'Status changed');
+            ActivityLog::addLog('success', 'Changing status resource "' . $resource->title . '"');
             return redirect()->back();
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', $th->getMessage());
+            ActivityLog::addLog('fail', 'Changing status resource ['. $th->getMessage() .']');
             return back();
         }
     }

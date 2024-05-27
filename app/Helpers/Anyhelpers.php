@@ -39,6 +39,11 @@ class Anyhelpers {
                 "url" => route('files.index'),
                 "status" => "",
                 "icon" => "folder-symlink-fill"
+            ],[
+                "title" => "Logs",
+                "url" => route('admin.logs'),
+                "status" => "",
+                "icon" => "activity"
             ]
         );
     }

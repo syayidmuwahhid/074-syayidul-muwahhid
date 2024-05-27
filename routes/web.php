@@ -14,6 +14,7 @@ Route::get('/', fn () => view('auth.welcome'))->name('welcome');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'signup']);
 
@@ -24,6 +25,8 @@ Route::name('admin.')->prefix('admin')->middleware('auth', 'auth-role:administra
     Route::patch('/users', [UsersController::class, 'changeStatus'])->name('users.change-status');
 
     Route::resource('transactions', TransactionController::class)->only('index', 'destroy');
+
+    Route::get('/logs', [DashboardController::class, 'logs'])->name('logs');
 });
 
 Route::name('user.')->middleware(['auth', 'auth-role:user'])->group(function() {
@@ -32,7 +35,6 @@ Route::name('user.')->middleware(['auth', 'auth-role:user'])->group(function() {
     Route::resource('transactions', TransactionController::class)->except('show', 'edit');
 
     Route::resource('files', FilesController::class)->only('store', 'destroy');
-
 });
 
 Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show')->middleware('auth');

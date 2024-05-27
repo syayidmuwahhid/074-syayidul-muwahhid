@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,5 +36,20 @@ class DashboardController extends Controller
         );
 
         return view('dashboard.admin.index', $resp);
+    }
+
+    public function logs()
+    {
+        $resp = array(
+            "title" => "Logs",
+            "title_page" => "Activity Logs",
+            "breadcrumbs" => array(
+                "Home" => route('admin.logs'),
+                "Activity Logs" => "#"
+            ),
+            "datas" => ActivityLog::all()
+        );
+
+        return view('dashboard.admin.logs', $resp);
     }
 }

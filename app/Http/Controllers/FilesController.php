@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\File;
 use App\Models\Transaction;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -65,10 +67,13 @@ class FilesController extends Controller
 
             $resp['status'] = 'success';
             $resp['data'] = $filename;
+
             DB::commit();
+            ActivityLog::addLog('success', 'Adding file into resource "' . $file->transaction->title . '"');
         } catch (\Throwable $th) {
             DB::rollBack();
             $resp['msg'] = $th->getMessage();
+            ActivityLog::addLog('fail', 'Adding file into resource ['. $th->getMessage() .']');
         }
         return response()->json($resp);
     }
@@ -90,9 +95,11 @@ class FilesController extends Controller
 
             DB::commit();
             session()->flash('success', 'File deleted successfully');
+            ActivityLog::addLog('success', 'Removing file into resource "' . $file->transaction->title . '"');
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', 'Unable to delete');
+            ActivityLog::addLog('fail', 'Removing file into resource ['. $th->getMessage() .']');
         }
         return redirect()->back();
     }

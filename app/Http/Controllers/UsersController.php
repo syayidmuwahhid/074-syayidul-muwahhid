@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Anyhelpers;
+use App\Models\ActivityLog;
 use App\Models\File;
 use App\Models\Role;
 use App\Models\Transaction;
@@ -80,14 +81,16 @@ class UsersController extends Controller
                 $payload['avatar'] = $path.$img_name;
             }
 
-            User::create($payload);
+            $user = User::create($payload);
 
             DB::commit();
             session()->flash('success', 'Successfully created');
+            ActivityLog::addLog('success', 'Adding new user "' . $user->email . '"');
             return redirect()->route('admin.users.index');
 
         } catch (\Throwable $th) {
             DB::rollBack();
+            ActivityLog::addLog('fail', 'Adding new user ['. $th->getMessage() .']');
             return back()->withErrors([
                 'error' => $th->getMessage(),
             ])->withInput();
@@ -180,12 +183,14 @@ class UsersController extends Controller
             $user->save();
             DB::commit();
             session()->flash('success', 'Successfully updated');
+            ActivityLog::addLog('success', 'Updating user "' . $user->email . '"');
 
             return redirect()->route('admin.users.show', Crypt::encryptString($id));
 
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', $th->getMessage());
+            ActivityLog::addLog('fail', 'Updating user ['. $th->getMessage() .']');
             return back()->withInput();
         }
     }
@@ -202,10 +207,12 @@ class UsersController extends Controller
             $user->delete();
             DB::commit();
             session()->flash('success', 'User deleted successfully');
+            ActivityLog::addLog('success', 'Removing user "' . $user->email . '"');
             return redirect()->route('admin.users.index');
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', $th->getMessage());
+            ActivityLog::addLog('fail', 'Removing user ['. $th->getMessage() .']');
             return back();
         }
     }
@@ -220,13 +227,14 @@ class UsersController extends Controller
 
             DB::commit();
             session()->flash('success', 'User Status Changed');
+            ActivityLog::addLog('success', 'Changing status user "' . $user->email . '"');
             return redirect()->back();
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', $th->getMessage());
+            ActivityLog::addLog('fail', 'Changing status user ['. $th->getMessage() .']');
             return back();
         }
-        return $request->all();
     }
 
     public function profile()
@@ -302,12 +310,14 @@ class UsersController extends Controller
             $user->save();
             DB::commit();
             session()->flash('success', 'Successfully updated');
+            ActivityLog::addLog('success', 'Updating profile');
 
             return redirect()->route('profile.index');
 
         } catch (\Throwable $th) {
             DB::rollBack();
             session()->flash('error', $th->getMessage());
+            ActivityLog::addLog('fail', 'Updating profile ['. $th->getMessage() .']');
             return back()->withInput();
         }
     }

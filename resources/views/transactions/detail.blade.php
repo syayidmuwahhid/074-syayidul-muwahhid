@@ -48,6 +48,8 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @else
+                                    <input type="hidden" name="status_id" value="{{ $data->status_id }}" />
                                     @endif
                                 </x-modal.body>
                                 <x-modal.footer />

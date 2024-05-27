@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\User;
 use Error;
 use Illuminate\Http\RedirectResponse;
@@ -39,8 +40,8 @@ class AuthController extends Controller
         // Attempt to authenticate the user with the provided credentials
         if (Auth::attempt($credentials)) {
 
-            // Check if the user's account is active
-            if (Auth::user()->status!= 1) {
+            // Check if the user's account is not active
+            if (Auth::user()->status != 1) {
                 // Return back with an error message and only the email input
                 return back()->withErrors([
                     'login' => 'Your account is not active.',
@@ -49,6 +50,9 @@ class AuthController extends Controller
 
             // Regenerate the session ID
             $request->session()->regenerate();
+
+            //log
+            ActivityLog::addLog('info', 'Logged into System');
 
             // Redirect the user to the appropriate dashboard based on their role
             if (Auth::user()->role_id == 1) {
@@ -122,6 +126,8 @@ class AuthController extends Controller
             $payload['password'] = Hash::make($payload['password']);
 
             User::create($payload);
+
+            ActivityLog::addLog('info', 'Register new user');
 
             DB::commit();
             session()->flash('success', 'Please log in to continue');
