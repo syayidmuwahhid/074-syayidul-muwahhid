@@ -1,0 +1,1 @@
+<embed type="application/x-google-chrome-pdf" src="chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/3ffa7353-85ad-43d0-9469-c77544fb17b6" original-url="http://localhost:8000/storage/files/2/tes/17165320940usvDq3bTjFC6veuVlzVSoWFOmJi1DvrsUNu99Bk.pdf" background-color="4283586137" javascript="allow" full-frame="" use-skia="">

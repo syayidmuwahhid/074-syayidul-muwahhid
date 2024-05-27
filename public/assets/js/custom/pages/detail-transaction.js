@@ -7,4 +7,8 @@ $(document).ready(function () {
             : "Copying failed, consider upgrading your browser.";
         alert(msg);
     });
+
+    $("#btn_add_file").click(() => {
+        $("#card_form_files").removeAttr("style");
+    });
 });

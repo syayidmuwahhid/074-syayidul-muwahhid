@@ -21,13 +21,15 @@
                     <x-card.toolbar>
                         @php
                             $filterData = array();
-                            foreach($statuses as $status) {
-                                if($status['id'] < 2) {
-                                    array_push($filterData, $status['status']);
-                                }
+                            foreach($roles as $role) {
+                                array_push($filterData, $role['role']);
                             }
                         @endphp
-                        <x-table.filter column="3" :filterData="$filterData" />
+                        <x-table.filter column="2" :filterData="$filterData" />
+
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+                            Add Users
+                        </a>
                     </x-card.toolbar>
                 </x-card.header>
                 <!--end::Header-->
@@ -38,7 +40,7 @@
                         <!--begin::Table head-->
                         <x-table.thead>
                             <th class="text-center">#</th>
-                            <th>Username</th>
+                            <th>Full Name</th>
                             <th>Role</th>
                             <th>Status</th>
                             <th>Joined Date</th>
@@ -57,7 +59,7 @@
                                         <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                             <a href="{{ route('admin.users.show', Crypt::encryptString($data["id"])) }}">
                                                 <div class="symbol-label">
-                                                    <img src="{{ asset($data["avatar"]) }}" alt="{{ $data["username"] }}" class="w-100">
+                                                    <img src="{{ asset($data["avatar"]) }}" alt="{{ $data["name"] }}" class="w-100">
                                                 </div>
                                             </a>
                                         </div>
@@ -65,20 +67,20 @@
 
                                         <!--begin::User details-->
                                         <div class="d-flex flex-column">
-                                            <a href="{{ route('admin.users.show', Crypt::encryptString($data["id"])) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["username"] }}</a>
+                                            <a href="{{ route('admin.users.show', Crypt::encryptString($data["id"])) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["name"] }}</a>
                                             <span>{{ $data["email"] }}</span>
                                         </div>
                                         <!--begin::User details-->
 
                                     </td>
-                                    <td>{{ $data["role"] }}</td>
-                                    <td><span class="badge {{ $data['status'] == 'inactive' ?  'badge-light-danger' : 'badge-light-success' }}">{{ $data["status"] }}</span></td>
+                                    <td>{{ $data->role->role }}</td>
+                                    <td><span class="badge {{ $data['status'] == '0' ?  'badge-light-danger' : 'badge-light-success' }}">{{ \App\Helpers\Anyhelpers::getStatus($data["status"]) }}</span></td>
                                     <td>{{ date('d F Y, H:i', strtotime($data["created_at"])) }}</td>
                                     <td class="text-center">
-                                        @if (!$loop->first)
-                                        <x-form :action="route('admin.users.delete')" method="DELETE">
-                                            <input type="hidden" name="id" value="{{ $data['id'] }}" />
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        @if ($data->id != 1)
+                                        <x-form :action="route('admin.users.destroy', Crypt::encryptString($data['id']))" method="DELETE" class="form-delete" id="form_delete{{ $loop->iteration }}" data-id="{{ Crypt::encryptString($data['id']) }}">
+                                            {{-- <input type="hidden" name="id" value="{{ $data['id'] }}" /> --}}
+                                            <button type="button" class="btn btn-sm btn-danger btn-form-delete">Delete</button>
                                         </x-form>
                                         @endif
                                     </td>

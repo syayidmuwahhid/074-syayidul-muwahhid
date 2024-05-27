@@ -10,6 +10,7 @@
         name="{{ $name }}"
         {{ $required ? 'required' : '' }}
         value="{{ $value }}"
+        {{ $attributes }}
     />
     <div class="text-muted fs-7">{{ $tooltip }}</div>
 </div>

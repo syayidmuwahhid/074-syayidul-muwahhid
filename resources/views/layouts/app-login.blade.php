@@ -72,7 +72,7 @@ License: For each use you must have a valid license purchased only from above li
     <div class="d-flex flex-center flex-column-auto p-10">
         <!--begin::Links-->
         <div class="d-flex align-items-center fw-bold fs-6">
-            <a href="#" class="text-muted text-hover-primary px-2">Syayidul Muwahhid</a>
+            <a href="https://github.com/syayidmuwahhid/074-syayidul-muwahhid" class="text-muted text-hover-primary px-2">Syayidul Muwahhid</a>
             {{-- <a href="https://keenthemes.com" class="text-muted text-hover-primary px-2">About</a> --}}
 
             {{-- <a href="https://devs.keenthemes.com" class="text-muted text-hover-primary px-2">Support</a> --}}
@@ -100,6 +100,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--end::Global Javascript Bundle-->
 
                 <!--end::Javascript-->
+            @stack('js')
     </body>
     <!--end::Body-->
 </html>

@@ -30,8 +30,8 @@
                                 <div class="d-flex flex-column">
                                     <!--begin::Name-->
                                     <div class="d-flex align-items-center mb-2">
-                                        <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ $data["username"] }}</a>
-                                        <span class="badge ms-3 badge-light-{{ $data['status'] == 'active' ? 'success' : 'danger' }}">{{ $data["status"] }}</span>
+                                        <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ $data["name"] }}</a>
+                                        <span class="badge ms-3 badge-light-{{ $data['status'] == '1' ? 'success' : 'danger' }}">{{ \App\Helpers\Anyhelpers::getStatus($data["status"]) }}</span>
                                     </div>
                                     <!--end::Name-->
 
@@ -44,7 +44,7 @@
                                             <path d="M12 22C14.6 22 17 21 18.7 19.4C17.9 16.9 15.2 15 12 15C8.8 15 6.09999 16.9 5.29999 19.4C6.99999 21 9.4 22 12 22Z" fill="currentColor"></path>
                                             </svg></span>
                                             <!--end::Svg Icon-->
-                                            {{ $data["role"] }}
+                                            {{ $data["role"]->role }}
                                         </a>
                                         {{-- <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
@@ -90,7 +90,7 @@
                                             <!--begin::Number-->
                                             <div class="d-flex align-items-center">
                                                 <i class="bi bi-cloud-upload-fill fs-3 me-3"></i>
-                                                <div class="fs-2 fw-bolder">0</div>
+                                                <div class="fs-2 fw-bolder">{{ count($data->transaction) }}</div>
                                             </div>
                                             <!--end::Number-->
 
@@ -104,7 +104,7 @@
                                             <!--begin::Number-->
                                             <div class="d-flex align-items-center">
                                                 <i class="bi bi-folder-symlink-fill fs-1 me-3"></i>
-                                                <div class="fs-2 fw-bolder">0</div>
+                                                <div class="fs-2 fw-bolder">{{ $count_files }}</div>
                                             </div>
                                             <!--end::Number-->
 
@@ -139,9 +139,8 @@
                     <!--end::Card title-->
 
                     <!--begin::Action-->
-                    @if($data["role"] != "Administrator")
-                    <a href="{{ route('admin.users.edit', Crypt::encryptString($data["id"])) }}" class="btn btn-primary align-self-center">Edit Profile</a>
-                    @endif
+                    @php($uri = Auth::user()->role_id == 1 ? 'admin.users.edit' : 'profile.edit')
+                    <a href="{{ route($uri, Crypt::encryptString($data["id"])) }}" class="btn btn-primary align-self-center">Edit Profile</a>
                     <!--end::Action-->
                 </x-card.header>
                 <!--begin::Card header-->
@@ -156,7 +155,7 @@
 
                         <!--begin::Col-->
                         <div class="col-lg-8">
-                            <span class="fw-bolder fs-6 text-gray-800">{{ $data["username"] }}</span>
+                            <span class="fw-bolder fs-6 text-gray-800">{{ $data["name"] }}</span>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -187,7 +186,7 @@
 
                         <!--begin::Col-->
                         <div class="col-lg-8 d-flex align-items-center">
-                            <span class="fw-bolder fs-6 text-gray-800 me-2">{{ $data["phone"] }}</span>
+                            <span class="fw-bolder fs-6 text-gray-800 me-2">{{ !$data["phone"] ? '-' : $data['phone'] }}</span>
 
                             {{-- <span class="badge badge-success">Verified</span> --}}
                         </div>

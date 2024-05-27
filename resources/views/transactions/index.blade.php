@@ -16,18 +16,22 @@
 
             <!--begin::Card toolbar-->
             <x-card.toolbar>
+                @if(Auth::user()->role_id == 1)
                 @php
                     $filterData = array();
                     foreach ($users as $user) {
-                        array_push($filterData, $user['username']);
+                        array_push($filterData, $user['name']);
                     }
                 @endphp
                 <x-table.filter column="3" :filterData="$filterData" />
+                @endif
 
                 <!--begin::Add product-->
-                {{-- <a href="{{ route('transactions.create') }}" class="btn btn-primary">
-                    Add Product
-                </a> --}}
+                @if(Auth::user()->role_id != 1)
+                <a href="{{ route('user.transactions.create') }}" class="btn btn-primary">
+                    New Resource
+                </a>
+                @endif
                 <!--end::Add product-->
             </x-card.toolbar>
             <!--end::Card toolbar-->
@@ -42,8 +46,10 @@
                     <th>#</th>
                     <th>Title</th>
                     <th>Date</th>
-                    <th>User Add</th>
+                    @if(Auth::user()->role_id == 1)<th>User Add</th>@endif
+                    <th>Number of files</th>
                     <th>Tags</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </x-table.head>
                 <!--end::Table head-->
@@ -55,16 +61,17 @@
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>
-                            @if($isadmin)
-                            <a href="{{ route('admin.transactions.show', Crypt::encryptString($data["id"])) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["title"] }}</a>
-                            @else
-                            <a href="{{ route('transactions.show', Crypt::encryptString($data["id"])) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["title"] }}</a>
-                            @endif
+                            {{-- @if(Auth::user()->role_id == 1)
+                            <a href="{{ route('admin.transactions.show', Crypt::encryptString($data->id)) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["title"] }}</a>
+                            @else --}}
+                            <a href="{{ route('transactions.show', Crypt::encryptString($data->id)) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["title"] }}</a>
+                            {{-- @endif --}}
                         </td>
-                        <td>{{ date('d F Y', strtotime($data["date"])) }}</td>
-                        <td>{{ $data["user_add"] }}</td>
+                        <td>{{ date('d F Y', strtotime($data->created_at)) }}</td>
+                        @if(Auth::user()->role_id == 1) <td>{{ $data->user->name }}</td> @endif
+                        <td>{{ count($data->file) }} Files</td>
                         @php
-                            $tags = explode(',', $data["tags"]);
+                            $tags = explode(',', $data->tags);
                         @endphp
                         <td>
                             @foreach ($tags as $tag)
@@ -72,10 +79,20 @@
                             @endforeach
                         </td>
                         <td>
-                            <form action="{{ route('transactions.delete') }}" method="post">
+                            @if($data->status_id == '1')
+                            @php($badge = 'badge-warning')
+                            @elseif($data->status_id == '2')
+                            @php($badge = 'badge-success')
+                            @else
+                            @php($badge = 'badge-danger')
+                            @endif
+                            <span class="badge {{ $badge }}">{{ $data->status->status }}</span></td>
+                        <td>
+                            @php($uri = Auth::user()->role_id == 1 ? 'admin.transactions.destroy' : 'user.transactions.destroy')
+                            <form action="{{ route($uri, Crypt::encryptString($data['id'])) }}" method="post">
                                 @csrf @method("delete")
                                 <input type="hidden" name="id" value="{{ $data['id'] }}" />
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="button" class="btn btn-sm btn-danger btn-form-delete">Delete</button>
                             </form>
                         </td>
                     </tr>

@@ -66,16 +66,16 @@ License: For each use you must have a valid license purchased only from above li
 
     <!--begin::Message-->
     <div class="fw-bold fs-3 text-muted mb-15">
-        Website untuk menyimpan resource file berupa Foto/Dokumen/Video </br>
-        untuk digunakan sebagai resource (link) dari sebuah aplikasi.
+        {{-- Website untuk menyimpan resource file berupa Foto/Dokumen/Video <br />
+        untuk digunakan sebagai resource (link) dari sebuah aplikasi. --}}
+        Website for storing resource files in the form of Photos/Documents/Videos <br />
+        to be used as a resource (link) for an application.
     </div>
     <!--end::Message-->
 
     <!--begin::Action-->
     <div class="text-center mr-5">
-        <a href="{{ route('login.') }}" class="btn btn-lg btn-primary fw-bolder">Go to Login Page</a>
-        <a href="{{ route('admin.') }}" class="btn btn-lg btn-success fw-bolder">Go to Admin Page</a>
-        <a href="{{ route('user.') }}" class="btn btn-lg btn-info fw-bolder">Go to User Page</a>
+        <a href="{{ Auth::user() ? Auth::user()->role->id == 1 ? route('admin.dashboard') :  route('user.dashboard') : route('user.dashboard') }}" class="btn btn-lg btn-primary fw-bolder">Go to Home Page</a>
     </div>
     <!--end::Action-->
 

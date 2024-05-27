@@ -19,6 +19,7 @@ License: For each use you must have a valid license purchased only from above li
 		<meta name="keywords" content="Jet theme, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
 		<link rel="canonical" href="Https://preview.keenthemes.com/jet-free" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="baseUrl" content="{{ url('') }}" />
 		<link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
@@ -30,6 +31,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Global Stylesheets Bundle-->
         <x-script-js :src="asset('assets/plugins/custom/jquery/jquery-3.7.1.min.js')" />
         <x-link-css :href="asset('assets/plugins/custom/datatables/datatables.min.css')" />
+        <x-script-js src="https://cdn.jsdelivr.net/npm/sweetalert2@11" />
         @stack('css')
 	</head>
 	<!--end::Head-->
@@ -65,7 +67,7 @@ License: For each use you must have a valid license purchased only from above li
 		<x-script-js :src="asset('assets/js/scripts.bundle.js')" />
         <x-script-js :src="asset('assets/plugins/custom/datatables/datatables.min.js')" />
         <x-script-js :src="asset('assets/js/custom/helpers.js')" />
-		<!--end::Global Javascript Bundle-->
+        <!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		@stack('js')
 		<!--end::Page Custom Javascript-->
