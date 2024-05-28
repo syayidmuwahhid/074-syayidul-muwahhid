@@ -70,23 +70,13 @@
                         <td>{{ date('d F Y', strtotime($data->created_at)) }}</td>
                         @if(Auth::user()->role_id == 1) <td>{{ $data->user->name }}</td> @endif
                         <td>{{ count($data->file) }} Files</td>
-                        @php
-                            $tags = explode(',', $data->tags);
-                        @endphp
                         <td>
-                            @foreach ($tags as $tag)
+                            @foreach ($data->tags as $tag)
                                 <span class="badge badge-light-info">{{ $tag }}</span>
                             @endforeach
                         </td>
                         <td>
-                            @if($data->status_id == '1')
-                            @php($badge = 'badge-warning')
-                            @elseif($data->status_id == '2')
-                            @php($badge = 'badge-success')
-                            @else
-                            @php($badge = 'badge-danger')
-                            @endif
-                            <span class="badge {{ $badge }}">{{ $data->status->status }}</span></td>
+                            <span class="badge {{ $data->badge }}">{{ $data->status->status }}</span></td>
                         <td>
                             @php($uri = Auth::user()->role_id == 1 ? 'admin.transactions.destroy' : 'user.transactions.destroy')
                             <form action="{{ route($uri, Crypt::encryptString($data['id'])) }}" method="post">
@@ -107,6 +97,3 @@
     <!--end::Products-->
 </div>
 @endsection
-
-@push('js')
-@endpush

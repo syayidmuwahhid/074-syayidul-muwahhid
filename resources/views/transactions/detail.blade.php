@@ -12,14 +12,7 @@
             <x-card>
                 <!--begin::Card header-->
                 <x-card.header>
-                    @if($data->status_id == '1')
-                    @php($badge = 'badge-light-warning')
-                    @elseif($data->status_id == '2')
-                    @php($badge = 'badge-light-success')
-                    @else
-                    @php($badge = 'badge-light-danger')
-                    @endif
-                    <x-card.title title="Resource Transaction <span class='badge {{ $badge }}'>{{ $data->status->status }}</span>" />
+                    <x-card.title title="Resource Transaction <span class='badge {{ $data->badge }}'>{{ $data->status->status }}</span>" />
                     <x-card.toolbar>
                         @if (Auth::user()->role_id != 1)
                         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit"><i class="bi bi-pencil"></i></button>
@@ -204,35 +197,17 @@
                         <tbody>
                             <!--begin::Table row-->
                             @foreach ($data->file as $file)
-                            @php($filename = $file['location'].$file['name'])
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="text-center">
-                                    <?php
-                                        $ext = explode('.', $filename)[1];
-                                        if($ext == 'mp4' || $ext == 'mkv' || $ext == 'mov' || $ext == 'ts') {
-                                            $link = 'https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-play-video-icon-graphic-design-template-vector-png-image_530837.jpg';
-                                            $modalAsset = '<video width="640" height="360" controls>
-                                                                <source src="'. asset($filename) .'" type="video/mp4">
-                                                                Your browser does not support the video tag.
-                                                            </video>';
-                                        } elseif ($ext == 'pdf') {
-                                            $link = 'https://st3.depositphotos.com/4799321/14326/v/450/depositphotos_143261637-stock-illustration-pdf-download-vector-icon-simple.jpg';
-                                            $modalAsset = '<iframe src="'. asset($filename) .'" width="800" height="500"></iframe>';
-                                        } else {
-                                            $link = asset($filename);
-                                            $modalAsset = '<img src="'. asset($filename) .'" alt="file" />';
-                                        }
-                                    ?>
-
-                                    <img src="{{ $link }}" alt="file" width="200" data-bs-toggle="modal" data-bs-target="#modal-{{ $file->id }}"/>
+                                    <img src="{{ $file->img_link }}" alt="file" width="200" data-bs-toggle="modal" data-bs-target="#modal-{{ $file->id }}"/>
 
                                     <x-modal id="modal-{{ $file->id }}">
-                                        {!! $modalAsset !!}
+                                        {!! $file->modalAsset !!}
                                     </x-modal>
                                 </td>
                                 <td class="text-center">
-                                    <button data-link="{{ url($filename) }}" class="btn btn-success btn-sm copy_txt_btn" {{ $data->status_id != 2 ? 'disabled' : '' }}>
+                                    <button data-link="{{ url($file->filename) }}" class="btn btn-success btn-sm copy_txt_btn" {{ $data->status_id != 2 ? 'disabled' : '' }}>
                                         <i class="bi bi-paperclip fs-3"></i>
                                         Get Link
                                     </button>

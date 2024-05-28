@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File as FacadesFile;
-use Illuminate\Support\Facades\Storage;
 
 class FilesController extends Controller
 {
@@ -27,6 +26,18 @@ class FilesController extends Controller
             ->join('transactions', 'transactions.id', 'transaction_id')
             ->where('transactions.user_add', Auth::user()->id)
             ->get();
+        }
+
+        foreach ($files as $file) {
+            $ext = explode('.', $file->location.$file->name)[1];
+
+            if ($ext == 'mp4' || $ext == 'mkv' || $ext == 'mov' || $ext == 'ts') {
+                $file['img_link'] = 'https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-play-video-icon-graphic-design-template-vector-png-image_530837.jpg';
+            } elseif ($ext == 'pdf') {
+                $file['img_link'] = 'https://st3.depositphotos.com/4799321/14326/v/450/depositphotos_143261637-stock-illustration-pdf-download-vector-icon-simple.jpg';
+            } else {
+                $file['img_link'] = asset($file->location.$file->name);
+            }
         }
 
         $resp = array(

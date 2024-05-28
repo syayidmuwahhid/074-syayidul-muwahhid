@@ -13,17 +13,6 @@ class Anyhelpers {
                 "status" => "",
                 "icon" => "house-fill"
             ],
-            // [
-            //     "title" => "Statuses",
-            //     "url" => route('admin.statuses.'),
-            //     "status" => "",
-            //     "icon" => "card-heading"
-            // ],[
-            //     "title" => "Roles",
-            //     "url" => route('admin.roles.'),
-            //     "status" => "",
-            //     "icon" => "fingerprint"
-            // ],
             [
                 "title" => "Users",
                 "url" => route('admin.users.index'),

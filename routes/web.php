@@ -1,12 +1,10 @@
 <?php
 
-use App\Helpers\Anyhelpers;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UsersController;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => view('auth.welcome'))->name('welcome');

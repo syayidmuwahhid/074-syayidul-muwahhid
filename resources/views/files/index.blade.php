@@ -24,17 +24,7 @@
                 <div class="row g-0 portfolio-container">
                     @foreach($datas as $data)
                     <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item filter-{{ $data->transaction_id }} p-2">
-                        <?php
-                            $ext = explode('.', $data->location.$data->name)[1];
-                            if($ext == 'mp4' || $ext == 'mkv' || $ext == 'mov' || $ext == 'ts') {
-                                $link = 'https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-play-video-icon-graphic-design-template-vector-png-image_530837.jpg';
-                            } elseif ($ext == 'pdf') {
-                                $link = 'https://st3.depositphotos.com/4799321/14326/v/450/depositphotos_143261637-stock-illustration-pdf-download-vector-icon-simple.jpg';
-                            } else {
-                                $link = asset($data->location.$data->name);
-                            }
-                        ?>
-                        <img src="{{ $link }}" class="img-fluid" alt=""/>
+                        <img src="{{ $data->img_link }}" class="img-fluid" alt=""/>
                         <div class="portfolio-info">
                             <a href="{{ asset($data->location.$data->name) }}" data-gallery="portfolio-gallery" class="glightbox preview-link">
                                 <i class="bi bi-zoom-in fs-1" style="color:black"></i>

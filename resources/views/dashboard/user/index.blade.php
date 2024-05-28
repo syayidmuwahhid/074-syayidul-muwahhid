@@ -77,27 +77,17 @@
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>
-                                        <a href="{{ route('transactions.show', Crypt::encryptString($data->id)) }}" class="text-gray-800 text-hover-primary mb-1">{{ $data["title"] }}</a>
+                                        <a href="{{ $data->uri_detail }}" class="text-gray-800 text-hover-primary mb-1">{{ $data->title }}</a>
                                     </td>
                                     <td>{{ date('d F Y', strtotime($data->created_at)) }}</td>
                                     <td>{{ count($data->file) }} Files</td>
-                                    @php
-                                        $tags = explode(',', $data->tags);
-                                    @endphp
                                     <td>
-                                        @foreach ($tags as $tag)
+                                        @foreach ($data->tags as $tag)
                                             <span class="badge badge-light-info">{{ $tag }}</span>
                                         @endforeach
                                     </td>
                                     <td>
-                                        @if($data->status_id == '1')
-                                        @php($badge = 'badge-warning')
-                                        @elseif($data->status_id == '2')
-                                        @php($badge = 'badge-success')
-                                        @else
-                                        @php($badge = 'badge-danger')
-                                        @endif
-                                        <span class="badge {{ $badge }}">{{ $data->status->status }}</span>
+                                        <span class="badge {{ $data->badge_status }}">{{ $data->status->status }}</span>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -118,10 +108,3 @@
 </div>
 
 @endsection
-
-@push('js')
-    {{-- <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/js/custom/widgets.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/js/custom/intro.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/js/custom/modals/create-app.js') }}"></script> --}}
-@endpush

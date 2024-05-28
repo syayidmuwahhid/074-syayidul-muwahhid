@@ -7,7 +7,6 @@ use App\Models\File;
 use App\Models\Status;
 use App\Models\Transaction;
 use App\Models\User;
-use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -27,6 +26,18 @@ class TransactionController extends Controller
         if (Auth::user()->role_id != 1) {
             $datas = $datas->where('user_add', Auth::user()->id);
             $home_route = route('user.dashboard');
+        }
+
+        foreach ($datas as $data) {
+            if ($data->status_id == '1') {
+                $data->badge = 'badge-light-warning';
+            } elseif ($data->status_id == '2') {
+                $data->badge = 'badge-light-success';
+            } else {
+                $data->badge = 'badge-light-danger';
+            }
+
+            $data->tags = explode(',', $data->tags);
         }
 
         $resp = array(
@@ -128,6 +139,37 @@ class TransactionController extends Controller
             $uriTransaction = route('admin.transactions.index');
         }
 
+        $data = Transaction::find($id);
+
+        if ($data->status_id == '1') {
+            $data->badge = 'badge-light-warning';
+        } elseif ($data->status_id == '2') {
+            $data->badge = 'badge-light-success';
+        } else {
+            $data->badge = 'badge-light-danger';
+        }
+
+        foreach ($data->file as $file) {
+            $file->filename = $file['location'].$file['name'];
+            $ext = explode('.', $file->filename)[1];
+
+            if($ext == 'mp4' || $ext == 'mkv' || $ext == 'mov' || $ext == 'ts') {
+                $file['img_link'] = 'https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-play-video-icon-graphic-design-template-vector-png-image_530837.jpg';
+                $file['modalAsset'] = '<video width="640" height="360" controls>
+                                    <source src="'. asset($file->filename) .'" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>';
+            } elseif ($ext == 'pdf') {
+                $file['img_link'] = 'https://st3.depositphotos.com/4799321/14326/v/450/depositphotos_143261637-stock-illustration-pdf-download-vector-icon-simple.jpg';
+                $file['modalAsset'] = '<iframe src="'. asset($file->filename) .'" width="800" height="500"></iframe>';
+            } else {
+                $file['img_link'] = asset($file->filename);
+                $file['modalAsset'] = '<img src="'. asset($file->filename) .'" alt="file" />';
+            }
+
+        }
+
+
         $resp = array(
             "title" => "Transactions",
             "title_page" => "Detail Data Transactions",
@@ -136,7 +178,7 @@ class TransactionController extends Controller
                 "Transactions" => $uriTransaction,
                 "Detail" => "#"
             ),
-            "data" => Transaction::find($id),
+            "data" => $data,
             "statuses" => Status::all()
         );
 

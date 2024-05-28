@@ -26,4 +26,5 @@ class ActivityLog extends Model
             'created_at' => now()
         ]);
     }
+
 }
