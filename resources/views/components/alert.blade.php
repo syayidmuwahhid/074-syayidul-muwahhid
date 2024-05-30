@@ -1,5 +1,5 @@
 <!--begin::Alert-->
-<div class="alert alert-dismissible bg-light-{{ $type }} d-flex flex-column flex-sm-row p-5 mb-10">
+<div class="alert alert-dismissible bg-light-{{ $type }} d-flex flex-column flex-sm-row p-5 mb-10 ms-10 me-10">
     <!--begin::Icon-->
     {{-- <span class="svg-icon svg-icon-2hx svg-icon-primary me-4 mb-5 mb-sm-0">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

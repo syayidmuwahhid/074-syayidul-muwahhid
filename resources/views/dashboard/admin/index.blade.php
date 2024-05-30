@@ -31,40 +31,48 @@
                                 <!--begin::Col-->
                                 <div class="col">
                                     <!--begin::Stat-->
-                                    <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                                        <span class="fs-4 fw-bold text-gray-400 d-block">User Registered</span>
-                                        <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true" data-kt-countup-value="{{ $count_users }}">0</span>
-                                    </div>
+                                    <a href="{{ route('admin.users.index') }}">
+                                        <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
+                                            <span class="fs-4 fw-bold text-gray-400 d-block">User Registered</span>
+                                            <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true" data-kt-countup-value="{{ $count_users }}">0</span>
+                                        </div>
+                                    </a>
                                     <!--end::Stat-->
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col">
                                     <!--begin::Stat-->
-                                    <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                                        <span class="fs-4 fw-bold text-gray-400 d-block">User Transactions</span>
-                                        <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true" data-kt-countup-value="{{ $count_transactions }}">0</span>
-                                    </div>
+                                    <a href="{{ route('admin.transactions.index') }}">
+                                        <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
+                                            <span class="fs-4 fw-bold text-gray-400 d-block">User Transactions</span>
+                                            <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true" data-kt-countup-value="{{ $count_transactions }}">0</span>
+                                        </div>
+                                    </a>
                                     <!--end::Stat-->
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col">
                                     <!--begin::Stat-->
-                                    <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                                        <span class="fs-4 fw-bold text-gray-400 d-block">User Files</span>
-                                        <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true" data-kt-countup-value="{{ $count_files }}">0</span>
-                                    </div>
+                                    <a href="{{ route('files.index') }}">
+                                        <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
+                                            <span class="fs-4 fw-bold text-gray-400 d-block">User Files</span>
+                                            <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true" data-kt-countup-value="{{ $count_files }}">0</span>
+                                        </div>
+                                    </a>
                                     <!--end::Stat-->
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col">
                                     <!--begin::Stat-->
-                                    <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                                        <span class="fs-4 fw-bold text-gray-400 d-block">User Activities</span>
-                                        <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true" data-kt-countup-value="{{ count($logs) }}">0</span>
-                                    </div>
+                                    <a href="{{ route('admin.logs') }}">
+                                        <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
+                                            <span class="fs-4 fw-bold text-gray-400 d-block">User Activities</span>
+                                            <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true" data-kt-countup-value="{{ count($logs) }}">0</span>
+                                        </div>
+                                    </a>
                                     <!--end::Stat-->
                                 </div>
                                 <!--end::Col-->

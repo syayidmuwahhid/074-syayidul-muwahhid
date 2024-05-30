@@ -55,7 +55,7 @@ License: For each use you must have a valid license purchased only from above li
     <div class="d-flex flex-row-fluid flex-column flex-column-fluid text-center p-10 py-lg-20">
         <!--begin::Logo-->
         <a href="#" class="pt-lg-20 mb-12">
-            <img alt="Logo" src="{{ asset('assets/media/logos/logo-default.svg') }}" class="h-70px"/>
+            <img alt="Logo" src="{{ asset('assets/media/logos/logo.png') }}" class="h-150px"/>
         </a>
         <!--end::Logo-->
 

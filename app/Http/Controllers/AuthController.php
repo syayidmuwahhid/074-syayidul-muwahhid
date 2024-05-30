@@ -103,42 +103,62 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    /**
+     * Handles user registration.
+     *
+     * @param  \Illuminate\Http\Request  $request The incoming request.
+     * @return \Illuminate\Http\RedirectResponse The redirect response after registration.
+     * @throws \Throwable If any error occurs during the registration process.
+     */
     public function signup(Request $request)
     {
+        // Start a database transaction
         DB::beginTransaction();
+
         try {
+            // Validate the incoming request data
             $request->validate([
                 'name' => ['required'],
                 'email' => ['required', 'email'],
-                'password' => ['required', 'min:8'],
+                'password' => ['required', 'in:8'],
             ]);
 
+            // Get all the request data
             $payload = $request->all();
 
-            if ($payload['password'] != $payload['confirmPassword']) {
+            // Check if the password and confirm password match
+            if ($payload['password']!= $payload['confirmPassword']) {
                 throw new Error('The password and confirmation password do not match.');
             }
 
+            // Remove unnecessary data from the payload
             unset($payload['confirmPassword']);
             unset($payload['_token']);
+
+            // Set default values for user registration
             $payload['status'] = 1;
             $payload['role_id'] = 2;
             $payload['password'] = Hash::make($payload['password']);
+            $payload['avatar'] = 'assets/media/svg/avatars/blank.svg';
 
+            // Create a new user in the database
             User::create($payload);
 
-            ActivityLog::addLog('info', 'Register new user');
-
+            // Commit the database transaction
             DB::commit();
+
+            // Set a success flash message and redirect the user to the login page
             session()->flash('success', 'Please log in to continue');
             return redirect()->route('login');
 
         } catch (\Throwable $th) {
+            // Rollback the database transaction in case of any error
             DB::rollBack();
+
+            // Return back with an error message and the input data
             return back()->withErrors([
                 'error' => $th->getMessage(),
             ])->withInput();
         }
-
     }
 }

@@ -46,7 +46,7 @@
                     <th>#</th>
                     <th>Title</th>
                     <th>Date</th>
-                    @if(Auth::user()->role_id == 1)<th>User Add</th>@endif
+                    @if(Auth::user()->role_id == 1)<th>Owner</th>@endif
                     <th>Number of files</th>
                     <th>Tags</th>
                     <th>Status</th>

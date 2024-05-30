@@ -5,7 +5,7 @@
         <!--begin::Logo-->
         <div class="aside-logo d-none d-lg-flex flex-column align-items-center flex-column-auto pt-10" id="kt_aside_logo">
             <a href="{{ url('/') }}">
-                <img alt="Logo" src="{{ asset('assets/media/logos/logo-compact.svg') }}" class="h-55px" />
+                <img alt="Logo" src="{{ asset('assets/media/logos/logo.png') }}" class="h-80px" />
             </a>
         </div>
         <!--end::Logo-->

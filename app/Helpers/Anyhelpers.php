@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use App\Models\FileExtension;
 use Illuminate\Support\Facades\Hash;
 
 class Anyhelpers {
@@ -10,28 +11,27 @@ class Anyhelpers {
             [
                 "title" => "Dashboard",
                 "url" => route('admin.dashboard'),
-                "status" => "",
                 "icon" => "house-fill"
             ],
             [
                 "title" => "Users",
                 "url" => route('admin.users.index'),
-                "status" => "",
                 "icon" => "people-fill"
+            ],[
+                "title" => "File Extensions",
+                "url" => route('admin.file-extensions.index'),
+                "icon" => "file-earmark-medical"
             ],[
                 "title" => "Transactions",
                 "url" => route('admin.transactions.index'),
-                "status" => "",
                 "icon" => "cloud-upload-fill"
             ],[
                 "title" => "Files",
                 "url" => route('files.index'),
-                "status" => "",
                 "icon" => "folder-symlink-fill"
             ],[
                 "title" => "Logs",
                 "url" => route('admin.logs'),
-                "status" => "",
                 "icon" => "activity"
             ]
         );
@@ -44,6 +44,20 @@ class Anyhelpers {
         }
 
         return "inactive";
+    }
+
+    public static function getExtension()
+    {
+        $data = FileExtension::all();
+        $exts = '';
+
+        $i = 0;
+        foreach ($data as $ext) {
+            $exts .= $ext->extension;
+            $exts .= $i++ < count($data) - 1 ?  ',' : '';
+        }
+
+        return $exts;
     }
 
 }

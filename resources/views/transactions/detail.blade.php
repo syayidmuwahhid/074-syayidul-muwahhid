@@ -153,11 +153,12 @@
 
                 <!--begin::Card body-->
                 <x-card.body>
-                    <form action="{{ route('user.files.store') }}" class="dropzone" id="my-awesome-dropzone">
+                    <form action="{{ route('user.files.store') }}" class="dropzone" id="my-dropzone">
                         @csrf
                         <input type="hidden" name="transaction_id" value="{{ $data->id }}"/>
                         <input type="hidden" name="transaction_title" value="{{ $data->title }}"/>
                     </form>
+                    <span class="required">Accepted File Format : {{ \App\Helpers\Anyhelpers::getExtension() }}</span>
                     <div class="text-muted fs-5">Reload Page After Upload File
                         <a href="{{ request()->url() }}">Click Here To Reload</a>
                     </div>

@@ -68,6 +68,7 @@
                         <input type="hidden" name="transaction_id" value="{{ $data->id }}"/>
                         <input type="hidden" name="transaction_title" value="{{ $data->title }}"/>
                     </form>
+                    <span class="required">Accepted File Format : {{ \App\Helpers\Anyhelpers::getExtension() }}</span>
                     <div class="text-muted fs-5">Click
                         <a href="{{ route('transactions.show', Crypt::encryptString($data->id)) }}">here</a>
                         to manage files</div>

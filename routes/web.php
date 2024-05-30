@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileExtensionController;
 use App\Http\Controllers\FilesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => view('auth.welcome'))->name('welcome');
+Route::get('/', fn () => view('auth.welcome'))->name('welcome')->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
@@ -21,6 +22,8 @@ Route::name('admin.')->prefix('admin')->middleware('auth', 'auth-role:administra
 
     Route::Resource('users', UsersController::class);
     Route::patch('/users', [UsersController::class, 'changeStatus'])->name('users.change-status');
+
+    Route::resource('file-extensions', FileExtensionController::class)->except('create', 'show');
 
     Route::resource('transactions', TransactionController::class)->only('index', 'destroy');
 
