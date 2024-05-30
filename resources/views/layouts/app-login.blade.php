@@ -15,17 +15,11 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en" >
     <!--begin::Head-->
     <head>
-        <title>Jet HTML Pro - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme by Keenthemes</title>
-        <meta charset="utf-8"/>
-        <meta name="description" content="Jet admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets."/>
-        <meta name="keywords" content="Jet theme, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content="Jet HTML Pro - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme" />
-        <meta property="og:url" content="https://keenthemes.com/products/jet-html-pro"/>
-        <meta property="og:site_name" content="Keenthemes | Jet HTML Free" />
-        <link rel="canonical" href="https://preview.keenthemes.com/jet-html-pro"/>
+        <title>API Resource Manager</title>
+        <meta name="description" content="Website for storing resource files in the form of Photos/Documents/Videos to be used as a resource (link) for an application." />
+		<meta name="keywords" content="API, Resource Manager, File Manager" />
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+        {{-- <link rel="canonical" href="https://preview.keenthemes.com/jet-html-pro"/> --}}
         <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}"/>
 
         <!--begin::Fonts-->

@@ -15,9 +15,9 @@ License: For each use you must have a valid license purchased only from above li
 	<head><base href="">
 		<meta charset="utf-8" />
 		<title>@yield('title') | API-RM</title>
-		<meta name="description" content="Jet admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
-		<meta name="keywords" content="Jet theme, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
-		<link rel="canonical" href="Https://preview.keenthemes.com/jet-free" />
+		<meta name="description" content="Website for storing resource files in the form of Photos/Documents/Videos to be used as a resource (link) for an application." />
+		<meta name="keywords" content="API, Resource Manager, File Manager" />
+		{{-- <link rel="canonical" href="Https://preview.keenthemes.com/jet-free" /> --}}
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="baseUrl" content="{{ url('') }}" />
 		<link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
