@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('tags');
+            $table->string('tags')->nullable();
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('user_add');
             $table->timestamps();

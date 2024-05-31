@@ -129,7 +129,7 @@ class TransactionController extends Controller
             DB::commit();
 
             // Set success flash message and log the activity
-            session()->flash('success', 'uccessfully added the resource, continue with adding files');
+            session()->flash('success', 'successfully added the resource, continue with adding files');
             ActivityLog::addLog('success', 'Adding new resource "'. $resource->title. '"');
 
             // Prepare the response data for the next view

@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678'),
-            'phone' => '081513931106',
+            'phone' => '',
             'avatar' => 'assets/media/svg/avatars/blank.svg',
             'role_id' => 1,
             'status' => 1,

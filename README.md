@@ -80,4 +80,22 @@ php artisan serve
 
 atau register dengan menu register pada halaman login.
 
+## Dokumentasi
+
+<p>
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/login-page.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/register-page.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/dashboard-user.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/dashboard-admin.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/add-user.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/add-resource.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/detail-resource.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/extension-list.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/file-list.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/list-resource.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/list-user.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/user-detail.png?raw=true" height="100" /> 
+<img src="https://github.com/syayidmuwahhid/074-syayidul-muwahhid/blob/master/public/assets/media/demo/log-list.png?raw=true" height="100" /> 
+</p>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
