@@ -60,7 +60,7 @@ class FileExtensionController extends Controller
             return redirect()->back();
         } catch (\Throwable $th) {
             session()->flash('error', $th->getMessage());
-            ActivityLog::addLog('error', 'Adding File extension ['. $th->getMessage() .']');
+            ActivityLog::addLog('fail', 'Adding File extension ['. $th->getMessage() .']');
             return redirect()->back()->withInput();
         }
     }
@@ -120,7 +120,7 @@ class FileExtensionController extends Controller
             return redirect()->route('admin.file-extensions.index');
         } catch (\Throwable $th) {
             session()->flash('error', $th->getMessage());
-            ActivityLog::addLog('error', 'Updating File extension ['. $th->getMessage() .']');
+            ActivityLog::addLog('fail', 'Updating File extension ['. $th->getMessage() .']');
             return redirect()->back()->withInput();
         }
     }

@@ -120,7 +120,7 @@ class AuthController extends Controller
             $request->validate([
                 'name' => ['required'],
                 'email' => ['required', 'email'],
-                'password' => ['required', 'in:8'],
+                'password' => ['required', 'min:8'],
             ]);
 
             // Get all the request data
